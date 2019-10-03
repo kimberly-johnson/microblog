@@ -7,7 +7,7 @@ class PostDetail extends Component {
     super(props);
     this.state = {
       editForm: ""
-    }
+    };
 
     this.renderForm = this.renderForm.bind(this);
     this.renderPost = this.renderPost.bind(this);
@@ -18,7 +18,7 @@ class PostDetail extends Component {
   componentDidMount() {
     const id = Number(this.props.match.params.id);
     this.props.getPostsFromAPI();
-    this.props.getCommentsFromAPI(id)
+    this.props.getCommentsFromAPI(id);
   }
 
   edit(id) {
@@ -28,7 +28,6 @@ class PostDetail extends Component {
   delete(id) {
     this.props.removePostsFromAPI(id);
     this.props.history.push("/");
-    console.log("delete")
   }
 
   renderPost() {
@@ -41,9 +40,10 @@ class PostDetail extends Component {
           <h2>{post.title}</h2>
           <h5>{post.description}</h5>
           <p>{post.body}</p>
-        </div>)
+        </div>
+      );
     } else {
-      return <p>loading...</p>
+      return <p>loading...</p>;
     }
   }
 
@@ -60,11 +60,19 @@ class PostDetail extends Component {
           {this.renderPost()}
           <button onClick={this.renderForm}>Edit</button>
           <button onClick={() => this.delete(id)}>Delete</button>
-        </div> 
-        <div className="comments">
-          <CommentList postID= {id} comments={this.props.comments} addCommentToAPI={this.props.addCommentToAPI} getCommentsFromAPI={this.props.getCommentsFromAPI}/>
         </div>
-        {this.state.editForm === "editForm" ? <FormContainer edit={this.state.editForm} id={id}/> : null }
+        <div className="comments">
+          <CommentList
+            postID={id}
+            comments={this.props.comments}
+            addCommentToAPI={this.props.addCommentToAPI}
+            getCommentsFromAPI={this.props.getCommentsFromAPI}
+            removeCommentFromAPI={this.props.removeCommentFromAPI}
+          />
+        </div>
+        {this.state.editForm === "editForm" ? (
+          <FormContainer edit={this.state.editForm} id={id} />
+        ) : null}
       </div>
     );
   }

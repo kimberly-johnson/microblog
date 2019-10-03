@@ -7,7 +7,7 @@ class PostForm extends Component {
       title: "",
       description: "",
       body: ""
-    }
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,14 +23,12 @@ class PostForm extends Component {
     this.props.edit === "editForm"
       ? this.props.editPostInAPI(this.props.id, this.state)
       : this.props.addPostToAPI(this.state);
-      this.props.history.push("/");
-    console.log("state", this.state);
+    this.props.history.push("/");
   }
 
   cancel(e) {
     e.preventDefault();
     this.props.history.push("/");
-    console.log("post cancelled");
   }
 
   render() {
@@ -42,22 +40,22 @@ class PostForm extends Component {
             onChange={this.handleChange}
             type="text"
             name="title"
-            value={this.state.title}>
-          </input>
+            value={this.state.title}
+          ></input>
           <label>Description:</label>
           <input
             onChange={this.handleChange}
             type="text"
             name="description"
-            value={this.state.description}>
-          </input>
+            value={this.state.description}
+          ></input>
           <label>Body:</label>
           <input
             onChange={this.handleChange}
             type="text"
             name="body"
-            value={this.state.body}>
-          </input>
+            value={this.state.body}
+          ></input>
           <button onClick={this.handleSubmit}>Save</button>
           <button onClick={this.cancel}>Cancel</button>
         </form>

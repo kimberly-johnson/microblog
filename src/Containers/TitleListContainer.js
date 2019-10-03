@@ -8,8 +8,6 @@ import {
 } from "../actions";
 import TitleList from "../Components/TitleList";
 
-
-
 function mapStateToProps(state) {
   return {
     posts: state.posts,

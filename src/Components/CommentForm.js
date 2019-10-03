@@ -17,9 +17,7 @@ class CommentForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log("this.props in commentform", this.props);
     this.props.addCommentToAPI(this.props.postID, this.state)
-    console.log("comment added")
   }
 
   render() {

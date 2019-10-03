@@ -72,7 +72,6 @@ export function addPostToAPI(post) {
       let response = await axios.post(`${API_URL}/posts`, post);
       dispatch(addPost(response.data));
     } catch (error) {
-      console.log("error add post");
       dispatch(handleError(error.response.data));
     }
   };
@@ -80,15 +79,15 @@ export function addPostToAPI(post) {
 
 export function getPostsFromAPI() {
   return async function thunk(dispatch) {
-      let response = await axios.get(`${API_URL}/posts`);
-      dispatch(getPosts(response.data));
+    let response = await axios.get(`${API_URL}/posts`);
+    dispatch(getPosts(response.data));
   };
 }
 
 export function removePostsFromAPI(id) {
   return async function thunk(dispatch) {
-      await axios.delete(`${API_URL}/posts/${id}`);
-      dispatch(removePost(id));
+    await axios.delete(`${API_URL}/posts/${id}`);
+    dispatch(removePost(id));
   };
 }
 
@@ -99,18 +98,27 @@ export function editPostInAPI(id, post) {
   };
 }
 
-export function getCommentsFromAPI(postID){
-  return async function thunk(dispatch){
+export function getCommentsFromAPI(postID) {
+  return async function thunk(dispatch) {
     let response = await axios.get(`${API_URL}/posts/${postID}/comments`);
     dispatch(getComments(response.data));
-  }
+  };
 }
 
-export function addCommentToAPI(postID, comment){
-  console.log("comment in addcommenttoapi", comment.newComment);
-  let commentToPost = {id: postID, text: comment.newComment}
-  return async function thunk(dispatch){
-    let response = await axios.post(`${API_URL}/posts/${postID}/comments`, commentToPost);
+export function addCommentToAPI(postID, comment) {
+  let commentToPost = { id: postID, text: comment.newComment };
+  return async function thunk(dispatch) {
+    let response = await axios.post(
+      `${API_URL}/posts/${postID}/comments`,
+      commentToPost
+    );
     dispatch(addComment(response.data));
-  }
+  };
+}
+
+export function removeCommentFromAPI(postID, commentID) {
+  return async function thunk(dispatch) {
+    await axios.delete(`${API_URL}/posts/${postID}/comments/${commentID}`);
+    dispatch(removeComment(commentID));
+  };
 }
