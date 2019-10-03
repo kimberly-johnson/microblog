@@ -18,13 +18,13 @@ class PostForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  //save to database
   handleSubmit(e) {
     e.preventDefault();
-    console.log("this.state is", this.state);
-    this.props.addPostToAPI(this.state);
-    this.props.history.push("/");
-    console.log("post added");
+    this.props.edit === "editForm"
+      ? this.props.editPostInAPI(this.props.id, this.state)
+      : this.props.addPostToAPI(this.state);
+
+    console.log("state", this.state);
   }
 
   cancel(e) {

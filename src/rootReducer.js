@@ -19,11 +19,19 @@ function rootReducer(state = INITIAL_STATE, action){
 
     case REMOVE_POST:
       return {...state,
-        posts: state.posts.filter(post=> post.id !== action.payload.id)};
-
+        posts: state.posts.filter(post => post.id !== action.payload.id)};
 
     case EDIT_POST:
-      return state;
+      // payload will be whole post
+      return { ...state,
+        posts: state.posts.map(post => {
+          if(post.id === action.payload.id){
+            return post = action.payload;
+          } else {
+            return post;
+          }
+        })
+      };
 
     case ADD_COMMENT: 
       return state;

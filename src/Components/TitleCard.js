@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 class TitleCard extends Component {
   render() {
-    console.log(this.props)
     return (
       <div>
         <li>

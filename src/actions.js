@@ -62,7 +62,7 @@ export function addPostToAPI(post) {
   return async function thunk(dispatch) {
     try {
       let response = await axios.post(`${API_URL}/posts`, post);
-      dispatch(addPost(response.data), () => console.log("after add post"));
+      dispatch(addPost(response.data));
     } catch (error) {
       console.log("error add post");
       dispatch(handleError(error.response.data));
@@ -73,7 +73,7 @@ export function addPostToAPI(post) {
 export function getPostsFromAPI() {
   return async function thunk(dispatch) {
       let response = await axios.get(`${API_URL}/posts`);
-      dispatch(getPosts(response.data), () => console.log("after get post"));
+      dispatch(getPosts(response.data));
   };
 }
 
@@ -81,5 +81,13 @@ export function removePostsFromAPI(id) {
   return async function thunk(dispatch) {
       await axios.delete(`${API_URL}/posts/${id}`);
       dispatch(removePost(id));
+  };
+}
+
+export function editPostInAPI(id, post) {
+  console.log("post edited")
+  return async function thunk(dispatch) {
+    let response = await axios.put(`${API_URL}/posts/${id}`, post);
+    dispatch(editPost(response.data));
   };
 }

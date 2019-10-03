@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import {
   getPostsFromAPI,
   addPost,
-  removePost,
   editPost,
   addComment,
   removeComment
@@ -20,7 +19,7 @@ function mapStateToProps(state) {
 
 const connectComponent = connect(
   mapStateToProps,
-  { getPostsFromAPI, addPost, removePost, editPost, addComment, removeComment }
+  { getPostsFromAPI, addPost, editPost, addComment, removeComment }
 );
 
 export default connectComponent(TitleList);

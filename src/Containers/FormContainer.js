@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import {
   addPostToAPI,
   removePost,
-  editPost,
+  editPostInAPI,
   addComment,
   removeComment
 } from "../actions";
@@ -17,7 +17,7 @@ function mapStateToProps(state) {
 
 const connectComponent = connect(
   mapStateToProps,
-  { addPostToAPI, removePost, editPost, addComment, removeComment }
+  { addPostToAPI, removePost, editPostInAPI, addComment, removeComment }
 );
 
 export default connectComponent(PostForm);
