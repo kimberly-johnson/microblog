@@ -21,7 +21,8 @@ class PostForm extends Component {
   //save to database
   handleSubmit(e) {
     e.preventDefault();
-   
+    console.log("this.state is", this.state);
+    this.props.addPostToAPI(this.state);
     this.props.history.push("/");
     console.log("post added");
   }

@@ -7,7 +7,7 @@ class TitleCard extends Component {
     return (
       <div>
         <li>
-          <Link to="/:id">{this.props.postInfo.title}</Link>
+          <Link to={`/${this.props.postInfo.id}`}>{this.props.postInfo.title}</Link>
           <p>{this.props.postInfo.description}</p>
         </li>
       </div>

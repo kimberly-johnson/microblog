@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import TitleList from "./Components/TitleList";
-import PostForm from "./Components/PostForm";
-import PostDetail from "./Components/PostDetail";
+import TitleListContainer from "./Containers/TitleListContainer";
+import FormContainer from "./Containers/FormContainer";
+import PostDetailContainer from "./Containers/PostDetailContainer";
 
 class Routes extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" render={() =>  <TitleList />} />
-        <Route exact path="/new" render={(rtProps) => <PostForm {...rtProps} /> } />
-        <Route exact path="/detail" render={(rtProps) =>  <PostDetail {...rtProps} />} />
+        <Route exact path="/" render={() =>  <TitleListContainer />} />
+        <Route exact path="/new" render={(rtProps) => <FormContainer {...rtProps} /> } />
+        <Route exact path="/:id" render={(rtProps) =>  <PostDetailContainer {...rtProps} />} />
       </Switch>
     );
   }

@@ -2,19 +2,23 @@ import React, { Component } from "react";
 import TitleCard from "./TitleCard";
 
 class TitleList extends Component {
-  render() {
-    const posts = [
-      { title: "dogs", description: "all about dogs", body: "we all love dogs" },
-      { title: "coffee", description: "coffee every day", body: "we all need coffee" }];
 
+  componentDidMount(){
+    this.props.getPostsFromAPI();
+  }
+  
+  
+  render() {
+    console.log("posts is in titlelist", this.props.posts);
     return (
       <div>
         <ul>
-          {posts.map(post => <TitleCard postInfo={post} />)}
+          {this.props.posts.map(post => <TitleCard postInfo={post} />)}
         </ul>
       </div>
     );
   }
 }
+
 
 export default TitleList;

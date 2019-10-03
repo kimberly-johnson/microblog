@@ -5,8 +5,13 @@ class PostDetail extends Component {
   constructor(props) {
     super(props);
 
+
     this.edit = this.edit.bind(this);
     this.delete = this.delete.bind(this);
+  }
+
+  componentDidMount(){
+    this.props.getPostsFromAPI();
   }
 
   edit() {
@@ -19,12 +24,19 @@ class PostDetail extends Component {
   }
 
   render() {
+    console.log("this.props", this.props);
+    let post = this.props.posts.filter(post=>(
+      post.id.toString() === this.props.match.params.id
+    ));
+    
+    debugger;
+   console.log(post);
     return (
       <div>
         <div className="post">
-          <h2>Title</h2>
-          <h5>Description</h5>
-          <p>body</p>
+          <h2>{post.title}</h2>
+          <h5>{post.description}</h5>
+          <p>{post.body}</p>
           <button onClick={this.edit}>Edit</button>
           <button onClick={this.delete}>Delete</button>
         </div>
