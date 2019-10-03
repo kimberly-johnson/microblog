@@ -18,8 +18,10 @@ class TitleList extends Component {
 
   render() {
     return (
-      <div>
-        <ul>{this.renderPost()}</ul>
+      <div className="container mx-0">
+        <div className="row">
+          {this.renderPost()}
+        </div>
       </div>
     );
   }

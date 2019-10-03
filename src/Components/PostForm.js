@@ -34,30 +34,39 @@ class PostForm extends Component {
   render() {
     return (
       <div>
-        <form>
-          <label>Title:</label>
-          <input
-            onChange={this.handleChange}
-            type="text"
-            name="title"
-            value={this.state.title}
-          ></input>
-          <label>Description:</label>
-          <input
-            onChange={this.handleChange}
-            type="text"
-            name="description"
-            value={this.state.description}
-          ></input>
-          <label>Body:</label>
-          <input
-            onChange={this.handleChange}
-            type="text"
-            name="body"
-            value={this.state.body}
-          ></input>
-          <button onClick={this.handleSubmit}>Save</button>
-          <button onClick={this.cancel}>Cancel</button>
+        <form className="m-3">
+          <div className="form-group">
+            <label>Title:</label>
+            <input
+              className="form-control"
+              onChange={this.handleChange}
+              type="text"
+              name="title"
+              value={this.state.title}
+            ></input>
+          </div>
+          <div className="form-group">
+            <label>Description:</label>
+            <input
+              className="form-control"
+              onChange={this.handleChange}
+              type="text"
+              name="description"
+              value={this.state.description}
+            ></input>
+          </div>
+          <div className="form-group">
+            <label>Body:</label>
+            <input
+              className="form-control"
+              onChange={this.handleChange}
+              type="text"
+              name="body"
+              value={this.state.body}
+            ></input>
+          </div>
+          <button className="btn btn-primary" onClick={this.handleSubmit}>Save</button>
+          <button className="btn btn-secondary mx-2" onClick={this.cancel}>Cancel</button>
         </form>
       </div>
     );

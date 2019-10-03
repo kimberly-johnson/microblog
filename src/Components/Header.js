@@ -5,10 +5,16 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <h1>Microblog</h1>
-        <h3>Get in the Rithm of blogging!</h3>
-        <NavLink to="/">Blog</NavLink>
-        <NavLink to="/new">Add a new post</NavLink>
+        <div className="jumbotron mx-3">
+          <h1 className="display-4">Microblog</h1>
+          <p className="lead">Get in the Rithm of blogging!</p>
+          <button className="btn btn-link">
+            <NavLink to="/">Blog</NavLink>
+          </button>
+          <button className="btn btn-link">
+            <NavLink to="/new">Add a new post</NavLink>
+          </button>
+        </div>
       </div>
     );
   }

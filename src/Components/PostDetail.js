@@ -36,10 +36,10 @@ class PostDetail extends Component {
 
     if (this.props.posts.length) {
       return (
-        <div>
-          <h2>{post.title}</h2>
-          <h5>{post.description}</h5>
-          <p>{post.body}</p>
+        <div className="card-body">
+          <h5 className="card-title">{post.title}</h5>
+          <h6 className="card-subtitle">{post.description}</h6>
+          <p className="card-text">{post.body}</p>
         </div>
       );
     } else {
@@ -56,23 +56,31 @@ class PostDetail extends Component {
 
     return (
       <div>
-        <div className="post">
+        <div className="card">
           {this.renderPost()}
-          <button onClick={this.renderForm}>Edit</button>
-          <button onClick={() => this.delete(id)}>Delete</button>
+          <span>
+            <button className="btn btn-light" onClick={this.renderForm}>
+              <i className="fas fa-edit" style={{ color: "blue" }}></i>
+            </button>
+            <button className="btn btn-light" onClick={() => this.delete(id)}>
+              <i className="fas fa-times" style={{ color: "red" }}></i>
+            </button>
+          </span>
+          <hr></hr>
+          <h5>Comments:</h5>
+          <div className="comments">
+            <CommentList
+              postID={id}
+              comments={this.props.comments}
+              addCommentToAPI={this.props.addCommentToAPI}
+              getCommentsFromAPI={this.props.getCommentsFromAPI}
+              removeCommentFromAPI={this.props.removeCommentFromAPI}
+            />
+          </div>
+          {this.state.editForm === "editForm" ? (
+            <FormContainer edit={this.state.editForm} id={id} />
+          ) : null}
         </div>
-        <div className="comments">
-          <CommentList
-            postID={id}
-            comments={this.props.comments}
-            addCommentToAPI={this.props.addCommentToAPI}
-            getCommentsFromAPI={this.props.getCommentsFromAPI}
-            removeCommentFromAPI={this.props.removeCommentFromAPI}
-          />
-        </div>
-        {this.state.editForm === "editForm" ? (
-          <FormContainer edit={this.state.editForm} id={id} />
-        ) : null}
       </div>
     );
   }
