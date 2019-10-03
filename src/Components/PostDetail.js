@@ -16,12 +16,13 @@ class PostDetail extends Component {
   }
 
   componentDidMount() {
+    const id = Number(this.props.match.params.id);
     this.props.getPostsFromAPI();
+    this.props.getCommentsFromAPI(id)
   }
 
   edit(id) {
     this.props.editPostInAPI(id);
-    console.log("edit")
   }
 
   delete(id) {
@@ -61,7 +62,7 @@ class PostDetail extends Component {
           <button onClick={() => this.delete(id)}>Delete</button>
         </div> 
         <div className="comments">
-          <CommentList />
+          <CommentList postID= {id} comments={this.props.comments} addCommentToAPI={this.props.addCommentToAPI} getCommentsFromAPI={this.props.getCommentsFromAPI}/>
         </div>
         {this.state.editForm === "editForm" ? <FormContainer edit={this.state.editForm} id={id}/> : null }
       </div>

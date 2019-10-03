@@ -23,7 +23,7 @@ class PostForm extends Component {
     this.props.edit === "editForm"
       ? this.props.editPostInAPI(this.props.id, this.state)
       : this.props.addPostToAPI(this.state);
-
+      this.props.history.push("/");
     console.log("state", this.state);
   }
 

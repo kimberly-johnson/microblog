@@ -6,11 +6,22 @@ class TitleList extends Component {
     this.props.getPostsFromAPI();
   }
   
+  renderPost() {
+    console.log("this.props", this.props);
+    if (this.props.posts.length) {
+      return(
+      this.props.posts.map(post => <TitleCard key={post.id} postInfo={post} />))
+    } else {
+      return <p>loading...</p>
+    }
+  }
+
+
   render() {
     return (
       <div>
         <ul>
-          {this.props.posts.map(post => <TitleCard key={post.id} postInfo={post} />)}
+          {this.renderPost()}
         </ul>
       </div>
     );

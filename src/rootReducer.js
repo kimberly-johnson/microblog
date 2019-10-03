@@ -1,4 +1,4 @@
-import { GET_POSTS, ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, REMOVE_COMMENT } from "./actionTypes";
+import { GET_POSTS, ADD_POST, REMOVE_POST, EDIT_POST, GET_COMMENTS, ADD_COMMENT, REMOVE_COMMENT } from "./actionTypes";
 
 const INITIAL_STATE = {
   posts: [], 
@@ -19,7 +19,7 @@ function rootReducer(state = INITIAL_STATE, action){
 
     case REMOVE_POST:
       return {...state,
-        posts: state.posts.filter(post => post.id !== action.payload.id)};
+        posts: state.posts.filter(post => post.id !== action.payload)};
 
     case EDIT_POST:
       // payload will be whole post
@@ -33,8 +33,13 @@ function rootReducer(state = INITIAL_STATE, action){
         })
       };
 
+    case GET_COMMENTS:
+        return {...state,
+          comments: action.payload}
+
     case ADD_COMMENT: 
-      return state;
+      return {...state, 
+        comments: [...state.comments, action.payload]};
 
     case REMOVE_COMMENT:
       return state;

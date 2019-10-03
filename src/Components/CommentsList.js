@@ -3,15 +3,18 @@ import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 
 class CommentsList extends Component {
-  render() {
-    const comments = ["I like blue", "Blue is also my fav color."];
 
+  render() {
+    console.log("this.props.comments", this.props.comments);
+    let comments = this.props.comments.map(com => <Comment comment={com} />)
+    console.log("comments are", comments);
+    
     return (
       <div>
         <ul>
-          {comments.map(com => <Comment comment={com}/>)}
+          {comments}
         </ul>
-        <CommentForm />
+        <CommentForm postID={this.props.postID} addCommentToAPI={this.props.addCommentToAPI}/>
       </div>
     );
   }

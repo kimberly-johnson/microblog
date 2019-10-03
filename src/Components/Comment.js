@@ -14,7 +14,7 @@ class Comment extends Component {
   render() {
     return (
       <div>
-        <span>{this.props.comment}</span>
+        <span>{this.props.comment.text}</span>
         <button onClick={this.delete}>X</button>
       </div>
     );

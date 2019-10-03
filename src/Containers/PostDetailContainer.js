@@ -4,7 +4,8 @@ import {
   addPost,
   removePostsFromAPI,
   editPostInAPI,
-  addComment,
+  getCommentsFromAPI,
+  addCommentToAPI,
   removeComment
 } from "../actions";
 import PostDetail from "../Components/PostDetail";
@@ -20,7 +21,7 @@ function mapStateToProps(state) {
 
 const connectComponent = connect(
   mapStateToProps,
-  { getPostsFromAPI, addPost, removePostsFromAPI, editPostInAPI, addComment, removeComment }
+  { getPostsFromAPI, addPost, removePostsFromAPI, editPostInAPI, getCommentsFromAPI, addCommentToAPI, removeComment }
 );
 
 export default connectComponent(PostDetail);

@@ -3,6 +3,7 @@ import {
   ADD_POST,
   REMOVE_POST,
   EDIT_POST,
+  GET_COMMENTS,
   ADD_COMMENT,
   REMOVE_COMMENT
 } from "./actionTypes";
@@ -34,6 +35,13 @@ export function editPost(id) {
   return {
     type: EDIT_POST,
     payload: id
+  };
+}
+
+export function getComments(postID) {
+  return {
+    type: GET_COMMENTS,
+    payload: postID
   };
 }
 
@@ -85,9 +93,24 @@ export function removePostsFromAPI(id) {
 }
 
 export function editPostInAPI(id, post) {
-  console.log("post edited")
   return async function thunk(dispatch) {
     let response = await axios.put(`${API_URL}/posts/${id}`, post);
     dispatch(editPost(response.data));
   };
+}
+
+export function getCommentsFromAPI(postID){
+  return async function thunk(dispatch){
+    let response = await axios.get(`${API_URL}/posts/${postID}/comments`);
+    dispatch(getComments(response.data));
+  }
+}
+
+export function addCommentToAPI(postID, comment){
+  console.log("comment in addcommenttoapi", comment.newComment);
+  let commentToPost = {id: postID, text: comment.newComment}
+  return async function thunk(dispatch){
+    let response = await axios.post(`${API_URL}/posts/${postID}/comments`, commentToPost);
+    dispatch(addComment(response.data));
+  }
 }
