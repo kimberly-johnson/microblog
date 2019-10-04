@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import {
   getPostsFromAPI,
-  addPost,
+  getPostFromAPI,
   removePostsFromAPI,
   editPostInAPI,
   getCommentsFromAPI,
@@ -12,8 +12,9 @@ import PostDetail from "../Components/PostDetail";
 
 function mapStateToProps(state) {
   return {
-    posts: state.posts,
-    comments: state.comments
+    //maybe no comments, check 
+    comments: state.comments,
+    currentPost: state.currentPost
   };
 }
 
@@ -21,7 +22,7 @@ const connectComponent = connect(
   mapStateToProps,
   {
     getPostsFromAPI,
-    addPost,
+    getPostFromAPI,
     removePostsFromAPI,
     editPostInAPI,
     getCommentsFromAPI,

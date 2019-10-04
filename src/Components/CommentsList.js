@@ -6,6 +6,7 @@ class CommentsList extends Component {
   render() {
     let comments = this.props.comments.map(com => (
       <Comment
+        key={com.id}
         comment={com}
         commentID={com.id}
         postID={this.props.postID}

@@ -1,5 +1,6 @@
 import {
   GET_POSTS,
+  GET_POST,
   ADD_POST,
   REMOVE_POST,
   EDIT_POST,
@@ -15,6 +16,13 @@ export function getPosts(posts) {
   return {
     type: GET_POSTS,
     payload: posts
+  };
+}
+
+export function getPost(post) {
+  return {
+    type: GET_POST,
+    payload: post
   };
 }
 
@@ -59,6 +67,7 @@ export function removeComment(id) {
   };
 }
 
+//currently not doing anything with errors
 function handleError(error) {
   return {
     type: "ERROR",
@@ -77,10 +86,18 @@ export function addPostToAPI(post) {
   };
 }
 
+//write more try catches, 
 export function getPostsFromAPI() {
   return async function thunk(dispatch) {
     let response = await axios.get(`${API_URL}/posts`);
     dispatch(getPosts(response.data));
+  };
+}
+
+export function getPostFromAPI(postID) {
+  return async function thunk(dispatch) {
+    let response = await axios.get(`${API_URL}/posts/${postID}`);
+    dispatch(getPost(response.data));
   };
 }
 

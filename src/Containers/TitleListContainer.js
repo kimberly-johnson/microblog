@@ -1,23 +1,18 @@
 import { connect } from "react-redux";
 import {
   getPostsFromAPI,
-  addPost,
-  editPost,
-  addComment,
-  removeComment
 } from "../actions";
 import TitleList from "../Components/TitleList";
 
 function mapStateToProps(state) {
   return {
-    posts: state.posts,
-    comments: state.comments
+    posts: state.posts
   };
 }
 
 const connectComponent = connect(
   mapStateToProps,
-  { getPostsFromAPI, addPost, editPost, addComment, removeComment }
+  { getPostsFromAPI }
 );
 
 export default connectComponent(TitleList);

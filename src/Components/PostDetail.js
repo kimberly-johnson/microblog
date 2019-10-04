@@ -17,7 +17,7 @@ class PostDetail extends Component {
 
   componentDidMount() {
     const id = Number(this.props.match.params.id);
-    this.props.getPostsFromAPI();
+    this.props.getPostFromAPI(id);
     this.props.getCommentsFromAPI(id);
   }
 
@@ -31,10 +31,9 @@ class PostDetail extends Component {
   }
 
   renderPost() {
-    const id = Number(this.props.match.params.id);
-    const post = this.props.posts.filter(post => post.id === id)[0];
+    const post = this.props.currentPost;
 
-    if (this.props.posts.length) {
+    if (this.props.currentPost["title"]) {
       return (
         <div className="card-body">
           <h5 className="card-title">{post.title}</h5>
@@ -59,16 +58,30 @@ class PostDetail extends Component {
         <div className="card">
           {this.renderPost()}
           <span>
-            <button className="btn btn-light" onClick={this.renderForm}>
+            <button
+              type="button"
+              className="btn btn-light mx-3"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="edit post"
+              onClick={this.renderForm}
+            >
               <i className="fas fa-edit" style={{ color: "blue" }}></i>
             </button>
-            <button className="btn btn-light" onClick={() => this.delete(id)}>
+            <button
+              type="button"
+              className="btn btn-light mx-3"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="delete post"
+              onClick={() => this.delete(id)}
+            >
               <i className="fas fa-times" style={{ color: "red" }}></i>
             </button>
           </span>
           <hr></hr>
-          <h5>Comments:</h5>
-          <div className="comments">
+          <div className="comments mx-3">
+            <h5>Comments:</h5>
             <CommentList
               postID={id}
               comments={this.props.comments}
@@ -78,7 +91,11 @@ class PostDetail extends Component {
             />
           </div>
           {this.state.editForm === "editForm" ? (
-            <FormContainer edit={this.state.editForm} id={id} />
+            <FormContainer
+              edit={this.state.editForm}
+              id={id}
+              history={this.props.history}
+            />
           ) : null}
         </div>
       </div>

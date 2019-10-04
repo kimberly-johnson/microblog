@@ -1,5 +1,6 @@
 import {
   GET_POSTS,
+  GET_POST,
   ADD_POST,
   REMOVE_POST,
   EDIT_POST,
@@ -10,13 +11,17 @@ import {
 
 const INITIAL_STATE = {
   posts: [],
-  comments: []
+  comments: [],
+  currentPost: {}
 };
 
 function rootReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case GET_POSTS:
       return { ...state, posts: action.payload };
+    
+    case GET_POST:
+      return {...state, currentPost: action.payload}
 
     case ADD_POST:
       return { ...state, posts: [...state.posts, action.payload] };
@@ -32,7 +37,7 @@ function rootReducer(state = INITIAL_STATE, action) {
         ...state,
         posts: state.posts.map(post => {
           if (post.id === action.payload.id) {
-            return (post = action.payload);
+            return action.payload;
           } else {
             return post;
           }

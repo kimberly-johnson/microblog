@@ -1,23 +1,19 @@
 import { connect } from "react-redux";
 import {
   addPostToAPI,
-  removePost,
-  editPostInAPI,
-  addComment,
-  removeComment
+  editPostInAPI
 } from "../actions";
 import PostForm from "../Components/PostForm";
 
 function mapStateToProps(state) {
   return {
-    posts: state.posts,
-    comments: state.comments
+    posts: state.posts
   };
 }
 
 const connectComponent = connect(
   mapStateToProps,
-  { addPostToAPI, removePost, editPostInAPI, addComment, removeComment }
+  { addPostToAPI, editPostInAPI }
 );
 
 export default connectComponent(PostForm);

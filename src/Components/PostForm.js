@@ -31,6 +31,7 @@ class PostForm extends Component {
     this.props.history.push("/");
   }
 
+  //need to handle inputs, prepopulate and not allow empty values
   render() {
     return (
       <div>
@@ -65,8 +66,12 @@ class PostForm extends Component {
               value={this.state.body}
             ></input>
           </div>
-          <button className="btn btn-primary" onClick={this.handleSubmit}>Save</button>
-          <button className="btn btn-secondary mx-2" onClick={this.cancel}>Cancel</button>
+          <button className="btn btn-primary" onClick={this.handleSubmit}>
+            Save
+          </button>
+          <button className="btn btn-secondary mx-2" onClick={this.cancel}>
+            Cancel
+          </button>
         </form>
       </div>
     );
