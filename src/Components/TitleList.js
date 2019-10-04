@@ -8,7 +8,8 @@ class TitleList extends Component {
 
   renderPost() {
     if (this.props.posts.length) {
-      return this.props.posts.map(post => (
+      let sorted = this.props.posts.sort((a, b)=> (a.votes < b.votes)? 1 : -1)
+      return sorted.map(post => (
         <TitleCard key={post.id} postInfo={post} />
       ));
     } else {
@@ -17,6 +18,9 @@ class TitleList extends Component {
   }
 
   render() {
+    if (this.props.error) {
+      return <h1>Something bad happened. Try again later...</h1>;
+    }
     return (
       <div className="container mx-0">
         <div className="row">

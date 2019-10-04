@@ -1,33 +1,34 @@
 import { connect } from "react-redux";
 import {
-  getPostsFromAPI,
   getPostFromAPI,
   removePostsFromAPI,
   editPostInAPI,
   getCommentsFromAPI,
   addCommentToAPI,
-  removeCommentFromAPI
+  removeCommentFromAPI,
+  sendVoteToAPI
+
 } from "../actions";
 import PostDetail from "../Components/PostDetail";
 
 function mapStateToProps(state) {
   return {
-    //maybe no comments, check 
     comments: state.comments,
-    currentPost: state.currentPost
+    currentPost: state.currentPost,
+    error: state.error
   };
 }
 
 const connectComponent = connect(
   mapStateToProps,
   {
-    getPostsFromAPI,
     getPostFromAPI,
     removePostsFromAPI,
     editPostInAPI,
     getCommentsFromAPI,
     addCommentToAPI,
-    removeCommentFromAPI
+    removeCommentFromAPI,
+    sendVoteToAPI
   }
 );
 

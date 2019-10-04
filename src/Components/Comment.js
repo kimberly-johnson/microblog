@@ -16,7 +16,7 @@ class Comment extends Component {
       <div>
         <span>{this.props.comment.text}</span>
         <button
-          className="btn btn-light"
+          className="btn btn-link"
           onClick={() => this.delete(this.props.postID, this.props.commentID)}
         >
           <i className="fas fa-times" style={{color: "red"}}></i>

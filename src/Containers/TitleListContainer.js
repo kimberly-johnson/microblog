@@ -6,7 +6,8 @@ import TitleList from "../Components/TitleList";
 
 function mapStateToProps(state) {
   return {
-    posts: state.posts
+    posts: state.posts,
+    error: state.error
   };
 }
 

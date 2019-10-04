@@ -13,6 +13,8 @@ class PostDetail extends Component {
     this.renderPost = this.renderPost.bind(this);
     this.edit = this.edit.bind(this);
     this.delete = this.delete.bind(this);
+    this.upvote = this.upvote.bind(this);
+    this.downvote = this.downvote.bind(this);
   }
 
   componentDidMount() {
@@ -28,6 +30,14 @@ class PostDetail extends Component {
   delete(id) {
     this.props.removePostsFromAPI(id);
     this.props.history.push("/");
+  }
+
+  upvote(id){
+    this.props.sendVoteToAPI("up", id);
+  }
+
+  downvote(id){
+    this.props.sendVoteToAPI("down", id);
   }
 
   renderPost() {
@@ -51,8 +61,11 @@ class PostDetail extends Component {
   }
 
   render() {
+    if (this.props.error) {
+      return <h1>Something bad happened. Try again later...</h1>;
+    }
     const id = Number(this.props.match.params.id);
-
+    console.log("this.props.title in postdetail", this.props.title);
     return (
       <div>
         <div className="card">
@@ -60,7 +73,7 @@ class PostDetail extends Component {
           <span>
             <button
               type="button"
-              className="btn btn-light mx-3"
+              className="btn btn-link mx-3"
               data-toggle="tooltip"
               data-placement="bottom"
               title="edit post"
@@ -70,7 +83,7 @@ class PostDetail extends Component {
             </button>
             <button
               type="button"
-              className="btn btn-light mx-3"
+              className="btn btn-link mx-3"
               data-toggle="tooltip"
               data-placement="bottom"
               title="delete post"
@@ -78,6 +91,24 @@ class PostDetail extends Component {
             >
               <i className="fas fa-times" style={{ color: "red" }}></i>
             </button>
+
+            <p className="ml-3">
+              {this.props.currentPost.votes} votes:
+              <button className="btn btn-link">
+                <i
+                  className="fas fa-arrow-up mx-1"
+                  style={{ color: "green" }}
+                  onClick={()=>this.upvote(id)}
+                ></i>
+              </button>
+              <button className="btn btn-link">
+                <i
+                  className="fas fa-arrow-down mx-1"
+                  style={{ color: "red" }}
+                  onClick={()=>this.downvote(id)}
+                ></i>
+              </button>
+            </p>
           </span>
           <hr></hr>
           <div className="comments mx-3">
@@ -95,6 +126,9 @@ class PostDetail extends Component {
               edit={this.state.editForm}
               id={id}
               history={this.props.history}
+              title={this.props.currentPost.title}
+              description={this.props.currentPost.description}
+              body={this.props.currentPost.body}
             />
           ) : null}
         </div>

@@ -7,7 +7,8 @@ import PostForm from "../Components/PostForm";
 
 function mapStateToProps(state) {
   return {
-    posts: state.posts
+    posts: state,
+    error: state.error
   };
 }
 

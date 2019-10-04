@@ -4,9 +4,9 @@ class PostForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      description: "",
-      body: ""
+      title: "" || this.props.title,
+      description: "" || this.props.description,
+      body: ""|| this.props.body
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -31,8 +31,8 @@ class PostForm extends Component {
     this.props.history.push("/");
   }
 
-  //need to handle inputs, prepopulate and not allow empty values
   render() {
+    console.log("this.props.title", this.props.title);
     return (
       <div>
         <form className="m-3">
@@ -66,7 +66,7 @@ class PostForm extends Component {
               value={this.state.body}
             ></input>
           </div>
-          <button className="btn btn-primary" onClick={this.handleSubmit}>
+          <button disabled={Object.values(this.state).some(x => x==="")} className="btn btn-primary" onClick={this.handleSubmit}>
             Save
           </button>
           <button className="btn btn-secondary mx-2" onClick={this.cancel}>

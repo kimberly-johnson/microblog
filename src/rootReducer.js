@@ -6,7 +6,8 @@ import {
   EDIT_POST,
   GET_COMMENTS,
   ADD_COMMENT,
-  REMOVE_COMMENT
+  REMOVE_COMMENT,
+  UPDATE_VOTE
 } from "./actionTypes";
 
 const INITIAL_STATE = {
@@ -19,9 +20,9 @@ function rootReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case GET_POSTS:
       return { ...state, posts: action.payload };
-    
+
     case GET_POST:
-      return {...state, currentPost: action.payload}
+      return { ...state, currentPost: action.payload };
 
     case ADD_POST:
       return { ...state, posts: [...state.posts, action.payload] };
@@ -57,6 +58,15 @@ function rootReducer(state = INITIAL_STATE, action) {
           comment => comment.id !== action.payload
         )
       };
+
+    case UPDATE_VOTE:
+      return {
+        ...state,
+        currentPost: { ...state.currentPost, votes: action.payload.votes }
+      };
+
+    case "ERROR":
+      return { ...state, error: true };
 
     default:
       return state;

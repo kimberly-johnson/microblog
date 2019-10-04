@@ -6,7 +6,8 @@ import {
   EDIT_POST,
   GET_COMMENTS,
   ADD_COMMENT,
-  REMOVE_COMMENT
+  REMOVE_COMMENT,
+  UPDATE_VOTE
 } from "./actionTypes";
 import axios from "axios";
 
@@ -67,6 +68,13 @@ export function removeComment(id) {
   };
 }
 
+export function vote(direction, postID) {
+  return {
+    type: UPDATE_VOTE,
+    payload: direction
+  };
+}
+
 //currently not doing anything with errors
 function handleError(error) {
   return {
@@ -86,56 +94,98 @@ export function addPostToAPI(post) {
   };
 }
 
-//write more try catches, 
+//write more try catches,
 export function getPostsFromAPI() {
   return async function thunk(dispatch) {
-    let response = await axios.get(`${API_URL}/posts`);
-    dispatch(getPosts(response.data));
+    try {
+      let response = await axios.get(`${API_URL}/posts`);
+      dispatch(getPosts(response.data));
+    } catch (error) {
+      console.log("error", error);
+      dispatch(handleError(error));
+    }
   };
 }
 
 export function getPostFromAPI(postID) {
   return async function thunk(dispatch) {
-    let response = await axios.get(`${API_URL}/posts/${postID}`);
-    dispatch(getPost(response.data));
+    try {
+      let response = await axios.get(`${API_URL}/posts/${postID}`);
+      dispatch(getPost(response.data));
+    } catch (error) {
+      dispatch(handleError(error.response.data));
+    }
   };
 }
 
 export function removePostsFromAPI(id) {
   return async function thunk(dispatch) {
-    await axios.delete(`${API_URL}/posts/${id}`);
-    dispatch(removePost(id));
+    try {
+      await axios.delete(`${API_URL}/posts/${id}`);
+      dispatch(removePost(id));
+    } catch (error) {
+      dispatch(handleError(error.response.data));
+    }
   };
 }
 
 export function editPostInAPI(id, post) {
   return async function thunk(dispatch) {
-    let response = await axios.put(`${API_URL}/posts/${id}`, post);
-    dispatch(editPost(response.data));
+    try {
+      let response = await axios.put(`${API_URL}/posts/${id}`, post);
+      dispatch(editPost(response.data));
+    } catch (error) {
+      dispatch(handleError(error.response.data));
+    }
   };
 }
 
 export function getCommentsFromAPI(postID) {
   return async function thunk(dispatch) {
-    let response = await axios.get(`${API_URL}/posts/${postID}/comments`);
-    dispatch(getComments(response.data));
+    try {
+      let response = await axios.get(`${API_URL}/posts/${postID}/comments`);
+      dispatch(getComments(response.data));
+    } catch (error) {
+      dispatch(handleError(error.response.data));
+    }
   };
 }
 
 export function addCommentToAPI(postID, comment) {
   let commentToPost = { id: postID, text: comment.newComment };
   return async function thunk(dispatch) {
-    let response = await axios.post(
-      `${API_URL}/posts/${postID}/comments`,
-      commentToPost
-    );
-    dispatch(addComment(response.data));
+    try {
+      let response = await axios.post(
+        `${API_URL}/posts/${postID}/comments`,
+        commentToPost
+      );
+      dispatch(addComment(response.data));
+    } catch (error) {
+      dispatch(handleError(error.response.data));
+    }
   };
 }
 
 export function removeCommentFromAPI(postID, commentID) {
   return async function thunk(dispatch) {
-    await axios.delete(`${API_URL}/posts/${postID}/comments/${commentID}`);
-    dispatch(removeComment(commentID));
+    try {
+      await axios.delete(`${API_URL}/posts/${postID}/comments/${commentID}`);
+      dispatch(removeComment(commentID));
+    } catch (error) {
+      dispatch(handleError(error.response.data));
+    }
+  };
+}
+
+export function sendVoteToAPI(direction, postID) {
+  return async function thunk(dispatch) {
+    try {
+      let response = await axios.post(
+        `${API_URL}/posts/${postID}/vote/${direction}`
+      );
+      dispatch(vote(response.data));
+    } catch (error) {
+      dispatch(handleError(error.response.data));
+    }
   };
 }
